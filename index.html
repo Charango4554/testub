@@ -1,44 +1,46 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Commande Go To Eat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini App pour Bot Telegram</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { text-align: center; }
-        select, button { margin-top: 20px; padding: 10px; font-size: 16px; }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>Bienvenue chez Go To Eat 🍔</h2>
-    <p>Choisissez votre option de livraison :</p>
+    <h2>Commande Go To Eat 🍔</h2>
+    <p>Sélectionnez votre option de livraison :</p>
     <select id="deliveryOption">
         <option value="Vram">Vram</option>
         <option value="Vroum">Vroum</option>
     </select>
-    <br>
+    <br><br>
     <button id="sendOrder">Envoyer la commande</button>
-</div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const sendOrderButton = document.getElementById('sendOrder');
-    const deliveryOption = document.getElementById('deliveryOption');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sendOrderButton = document.getElementById('sendOrder');
+            const deliveryOption = document.getElementById('deliveryOption');
 
-    sendOrderButton.addEventListener('click', function() {
-        const orderData = {
-            delivery: deliveryOption.value,
-        };
+            sendOrderButton.addEventListener('click', function() {
+                const orderData = {
+                    delivery: deliveryOption.value,
+                };
 
-        // Envoie les données au bot Telegram
-        Telegram.WebApp.sendData(JSON.stringify(orderData));
-    });
+                // Envoyer les données au bot Telegram
+                Telegram.WebApp.sendData(JSON.stringify(orderData)).then(() => {
+                    console.log("Données envoyées avec succès.");
+                    Telegram.WebApp.close(); // Fermer la Mini App après l'envoi
+                }).catch((error) => {
+                    console.error("Erreur lors de l'envoi des données :", error);
+                });
+            });
 
-    // Prépare la Mini App
-    Telegram.WebApp.ready();
-});
-</script>
+            Telegram.WebApp.ready();
+        });
+    </script>
 </body>
 </html>
