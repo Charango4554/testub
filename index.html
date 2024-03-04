@@ -7,17 +7,14 @@
     <style>
         body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
         .container { text-align: center; }
-        select, button { margin-top: 20px; padding: 10px; font-size: 16px; }
+        input, button { margin-top: 20px; padding: 10px; font-size: 16px; }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>Bienvenue chez Go To Eat 🍔</h2>
-    <p>Choisissez votre option de livraison :</p>
-    <select id="deliveryOption">
-        <option value="Vram">Vram</option>
-        <option value="Vroum">Vroum</option>
-    </select>
+    <p>Entrez votre option de livraison :</p>
+    <input type="text" id="deliveryOption" placeholder="Entrez l'option de livraison ici">
     <br>
     <button id="sendOrder">Envoyer la commande</button>
 </div>
@@ -29,11 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sendOrderButton.addEventListener('click', function() {
         const orderData = {
-            delivery: deliveryOption.value,
+            delivery: deliveryOption.value.trim(),
         };
 
-        // Envoie les données au bot Telegram
-        Telegram.WebApp.sendData(JSON.stringify(orderData));
+        if(orderData.delivery) {
+            // Envoie les données au bot Telegram
+            Telegram.WebApp.sendData(JSON.stringify(orderData));
+        } else {
+            alert("Veuillez entrer une option de livraison.");
+        }
     });
 
     // Prépare la Mini App
