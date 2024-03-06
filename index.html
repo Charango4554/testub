@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Commande Go To Eat</title>
+    <title>Test Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
@@ -12,32 +12,30 @@
 </head>
 <body>
 <div class="container">
-    <h2>Bienvenue chez Go To Eat 🍔</h2>
-    <p>Entrez votre option de livraison :</p>
-    <input type="text" id="deliveryOption" placeholder="Entrez l'option de livraison ici">
+    <h2>Welcome</h2>
+    <p>Type Text :</p>
+    <input type="text" id="textInput" placeholder="Enter your text here">
     <br>
-    <button id="sendOrder">Envoyer la commande</button>
-</div>
+    <button id="send Text">Send Text</button>
 
+</div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const sendOrderButton = document.getElementById('sendOrder');
-    const deliveryOption = document.getElementById('deliveryOption');
+    const sendTextButton = document.getElementById('sendText');
+    const textInput = document.getElementById('textInput');
 
-    sendOrderButton.addEventListener('click', function() {
-        const orderData = {
-            delivery: deliveryOption.value.trim(),
+    sendTextButton.addEventListener('click', function() {
+        const textData = {
+            text: textInput.value.trim(),
         };
 
-        if(orderData.delivery) {
-            // Envoie les données au bot Telegram
-            Telegram.WebApp.sendData(JSON.stringify(orderData));
+        if(textData.text) {
+            // Send the data to the Telegram bot
+            Telegram.WebApp.sendData(JSON.stringify(textData));
         } else {
-            alert("Veuillez entrer une option de livraison.");
+            alert("Please enter some text.");
         }
     });
-
-    // Prépare la Mini App
     Telegram.WebApp.ready();
 });
 </script>
