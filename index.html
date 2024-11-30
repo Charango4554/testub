@@ -58,7 +58,7 @@
             <input type="checkbox" id="cryptoCheckbox" name="crypto" value="Other Crypto">
             <label for="vram">Bitcoin</label>
             <input type="checkbox" id="bitcoinCheckbox" name="bitcoin" value="Bitcoin">
-            <label for="vroum">Other Crypto</label>
+            <label for="vroum">PayPal</label>
         </div>
         <button id="sendButton">Send Text</button>
     </div>
@@ -68,7 +68,7 @@
             var cryptoChecked = document.getElementById('cryptoCheckbox').checked;
             var bitcoinChecked = document.getElementById('bitcoinCheckbox').checked;
             if (!cryptoChecked && !bitcoinChecked) {
-                alert('Please select at least one checkbox (Other Crypto/Bitcoin).');
+                alert('Please select at least one checkbox (Other PayPal/Bitcoin).');
                 return;
             }
             
